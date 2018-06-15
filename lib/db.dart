@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'globals.dart' as G;
 
 class SaintsModel {
-  final _newSaintSubject = new BehaviorSubject<List<Saint>>();
+  final _newSaintSubject = new PublishSubject<List<Saint>>();
 
   Observable<List<Saint>> get saints => _newSaintSubject.observable;
 

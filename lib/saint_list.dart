@@ -14,6 +14,9 @@ class SaintList extends StatefulWidget {
 }
 
 class _SaintListState extends State<SaintList> {
+
+  var saintData = null;
+
   Widget buildRow(BuildContext context, int index, List<Saint> listData) {
     final Saint s = listData[index];
 
@@ -56,10 +59,13 @@ class _SaintListState extends State<SaintList> {
             builder:
                 (BuildContext context, AsyncSnapshot<List<Saint>> snapshot) {
               if (snapshot.hasData && snapshot.data.length > 0) {
+                if (saintData == null)
+                  saintData = snapshot.data;
+
                 return new ListView.builder(
-                    itemCount: snapshot.data.length,
+                    itemCount: saintData.length,
                     itemBuilder: (BuildContext context, int index) =>
-                        buildRow(context, index, snapshot.data));
+                        buildRow(context, index, saintData));
               } else {
                 return new Text("");
               }

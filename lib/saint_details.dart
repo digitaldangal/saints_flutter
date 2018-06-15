@@ -23,7 +23,7 @@ class _SaintDetailState extends State<SaintDetail> {
 
   bool get _showTitle {
     return _scrollController.hasClients &&
-        _scrollController.offset > _appBarHeight - kToolbarHeight;
+        _scrollController.offset + 10.0 > _appBarHeight - kToolbarHeight;
   }
 
   @override
