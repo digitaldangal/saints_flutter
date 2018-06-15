@@ -38,6 +38,8 @@ class Saint {
   String zhitie;
   int hasIcon;
 
+  bool get has_icon  => hasIcon == 1;
+
   Saint(
       {@required this.id,
       @required this.name,
