@@ -14,7 +14,6 @@ class SaintList extends StatefulWidget {
 }
 
 class _SaintListState extends State<SaintList> {
-
   var saintData = null;
 
   Widget buildRow(BuildContext context, int index, List<Saint> listData) {
@@ -38,7 +37,11 @@ class _SaintListState extends State<SaintList> {
                   child: new Container(
                       padding: new EdgeInsets.only(left: 10.0),
                       child: new Text(s.name,
-                          style: new TextStyle(fontSize: 18.0))))
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .body1
+                              .copyWith(fontSize: 18.0))))
             ],
           )),
       onTap: () => Navigator.push(
@@ -59,8 +62,7 @@ class _SaintListState extends State<SaintList> {
             builder:
                 (BuildContext context, AsyncSnapshot<List<Saint>> snapshot) {
               if (snapshot.hasData && snapshot.data.length > 0) {
-                if (saintData == null)
-                  saintData = snapshot.data;
+                if (saintData == null) saintData = snapshot.data;
 
                 return new ListView.builder(
                     itemCount: saintData.length,

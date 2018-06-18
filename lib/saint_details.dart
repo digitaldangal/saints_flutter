@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:html2md/html2md.dart' as html2md;
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'db.dart';
 
@@ -29,6 +31,14 @@ class _SaintDetailState extends State<SaintDetail> {
   @override
   Widget build(BuildContext context) {
     _appBarHeight = widget.saint.has_icon ? 350.0 : 100.0;
+
+    String markdown =
+        html2md.convert(widget.saint.zhitie);
+
+    final body1 = Theme.of(context).textTheme.body1.copyWith(fontSize: 18.0);
+    final textTheme = Theme.of(context).textTheme.copyWith(body1: body1);
+    final theme = Theme.of(context).copyWith(textTheme:textTheme);
+
 
     return new Scaffold(
         body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
@@ -62,8 +72,14 @@ class _SaintDetailState extends State<SaintDetail> {
                         ]),
                   ))),
       SliverList(
-          delegate:
-              new SliverChildListDelegate(<Widget>[Text(widget.saint.zhitie)]))
+          delegate: new SliverChildListDelegate(<Widget>[
+        Container(
+            padding: EdgeInsets.all(10.0),
+            child: MarkdownBody(
+                data: markdown,
+                styleSheet: MarkdownStyleSheet.fromTheme(theme),
+            ))
+      ]))
     ]));
   }
 }
