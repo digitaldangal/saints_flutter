@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         initialDate.add(new Duration(days: index - initialPage));
 
     final currentDateOS = currentDate.subtract(new Duration(days: 13));
-    
+
     final df1 = new DateFormat.yMMMMEEEEd('ru');
     final df2 = new DateFormat.yMMMMd('ru');
 
@@ -44,14 +44,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(title: new Text("Жития святых")),
-      body: new PageView.builder(
-        controller: _controller,
-        itemBuilder: (BuildContext context, int index) {
-          return _buildPage(context, index);
-        },
-      ),
+    return PageView.builder(
+      controller: _controller,
+      itemBuilder: (BuildContext context, int index) {
+        return _buildPage(context, index);
+      },
     );
   }
 }

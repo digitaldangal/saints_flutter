@@ -27,11 +27,13 @@ class _SaintListState extends State<SaintList> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               s.has_icon
-                  ? Image.network(
-                      "https://s3.amazonaws.com/from-alexey/saints-icons/${s.id}.jpg",
-                      width: 100.0,
-                      height: 100.0,
-                    )
+                  ? Hero(
+                      tag: '${s.id}',
+                      child: Image.network(
+                        "https://s3.amazonaws.com/from-alexey/saints-icons/${s.id}.jpg",
+                        width: 100.0,
+                        height: 100.0,
+                      ))
                   : Container(),
               new Expanded(
                   child: new Container(

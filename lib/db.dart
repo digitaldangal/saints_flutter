@@ -1,6 +1,38 @@
-import 'package:rxdart/rxdart.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+
+import 'package:rxdart/rxdart.dart';
+import 'package:flutter/services.dart';
+import 'package:sqflite/sqflite.dart';
+
+import 'dart:typed_data';
+import 'dart:io';
+
 import 'globals.dart' as G;
+
+void copyDatabase({@required String to}) async {
+  await deleteDatabase(to);
+
+  ByteData data = await rootBundle.load('assets/saints.sqlite');
+  List<int> bytes =
+  data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  await new File(to).writeAsBytes(bytes);
+}
+
+class TheViewModel extends InheritedWidget {
+  final SaintsModel theModel;
+
+  const TheViewModel({Key key, @required this.theModel, @required Widget child})
+      : assert(child != null),
+        super(key: key, child: child);
+
+  static SaintsModel of(BuildContext context) =>
+      (context.inheritFromWidgetOfExactType(TheViewModel) as TheViewModel)
+          .theModel;
+
+  @override
+  bool updateShouldNotify(TheViewModel oldWidget) => false;
+}
 
 class SaintsModel {
   final _newSaintSubject = new PublishSubject<List<Saint>>();

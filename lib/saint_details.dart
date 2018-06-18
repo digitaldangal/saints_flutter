@@ -30,7 +30,7 @@ class _SaintDetailState extends State<SaintDetail> {
 
   @override
   Widget build(BuildContext context) {
-    _appBarHeight = widget.saint.has_icon ? 350.0 : 100.0;
+    _appBarHeight = widget.saint.has_icon ? 360.0 : 100.0;
 
     String markdown =
         html2md.convert(widget.saint.zhitie);
@@ -58,9 +58,11 @@ class _SaintDetailState extends State<SaintDetail> {
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           widget.saint.has_icon
-                              ? Image.network(
+                              ? Hero(
+                              tag: '${widget.saint.id}',
+                              child: Image.network(
                                   "https://s3.amazonaws.com/from-alexey/saints-icons/${widget.saint.id}.jpg",
-                                  height: 250.0)
+                                  height: 250.0))
                               : Container(),
                           Expanded(
                               child: Center(
